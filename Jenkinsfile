@@ -3,13 +3,13 @@ pipeline {
     options { timestamps() }
 
     environment { 
-        cluster_name = 'Capstone-cluster'
-        registry = 'javiercaparo/aws-jenkins-pipeline-v4'
-		registryCredential = 'dockerhub'
-        ekr_registry = '156823553040.dkr.ecr.us-west-2.amazonaws.com'
-		dockerImage = ''
+        cluster_name = ''
+        registry = ''
+	registryCredential = 'dockerhub'
+        ekr_registry = ''
+	dockerImage = ''
         region = 'us-west-2'
-        s3_bucket = 's3://jc-eks-cloudformation'
+        s3_bucket = ''
         CI = 'true'
         app = 'my-app'
     }
@@ -28,7 +28,7 @@ pipeline {
         
         stage('Cloning Git') {
             steps {
-                git 'https://github.com/jfcb853/aws-jenkins-pipeline-v4.git'
+                git 'https://github.com/uyuy2017/eks-deployment.git'
             }
         }
         stage('Build Dependencies') {

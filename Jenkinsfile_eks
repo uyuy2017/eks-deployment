@@ -3,7 +3,7 @@ pipeline {
     
 	environment {
 		region = 'us-west-2'
-		cluster_name = 'Capstone-cluster'
+		cluster_name = ''
 	}
 
     agent any
@@ -14,7 +14,7 @@ pipeline {
 			steps {
 				withAWS(credentials: 'aws-credentials', region: 'us-west-2') {
 					sh '''
-						aws s3 cp s3://jc-eks-cloudformation/cluster.yaml cluster.yaml
+						aws s3 cp s3:///cluster.yaml cluster.yaml
 						ls
 					'''
 				}	

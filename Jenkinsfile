@@ -3,8 +3,8 @@ pipeline {
     options { timestamps() }
 
     environment { 
-        cluster_name = ''
-        registry = ''
+        cluster_name = 'test'
+        registry = 'uyuy2015/mallikarjun1983'
 	registryCredential = 'dockerhub'
         ekr_registry = ''
 	dockerImage = ''

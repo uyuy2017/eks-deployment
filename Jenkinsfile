@@ -28,13 +28,6 @@ pipeline {
                 sh 'npm install'
             }
         }
-
-        stage('Lint') {
-            steps {
-                sh 'hadolint Dockerfile'
-            }
-        }
-
        
         stage('Build Image to dockerhub') {
             when {

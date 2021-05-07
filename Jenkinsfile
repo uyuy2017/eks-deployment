@@ -3,29 +3,32 @@ pipeline {
     options { timestamps() }
 
     environment { 
-        cluster_name = 'test'
-        registry = 'uyuy2015/mallikarjun1983'
-	registryCredential = 'dockerhub'
-        ekr_registry = ''
-	dockerImage = ''
+        cluster_name = 'Capstone-cluster'
+        registry = 'javiercaparo/aws-jenkins-pipeline-v4'
+		registryCredential = 'dockerhub'
+        ekr_registry = '156823553040.dkr.ecr.us-west-2.amazonaws.com'
+		dockerImage = ''
         region = 'us-west-2'
-        s3_bucket = ''
+        s3_bucket = 's3://jc-eks-cloudformation'
         CI = 'true'
         app = 'my-app'
     }
 
     agent any
 
-     stages {
-	     
-	stage('Cloning Git') {
-            steps {
-                sh 'git clone https://github.com/uyuy2017/eks-deployment.git '
-            }     
-	         
+    tools {nodejs "nodejs" }
+
+    parameters {
+        gitParameter name: 'RELEASE_TAG',
+        type: 'PT_TAG',
+        defaultValue: 'master'
+    }
+
+    stages {
+        
         stage('Cloning Git') {
             steps {
-                sh 'git clone https://github.com/uyuy2017/eks-deployment.git '
+                git 'https://github.com/jfcb853/aws-jenkins-pipeline-v4.git'
             }
         }
         stage('Build Dependencies') {
@@ -33,7 +36,19 @@ pipeline {
                 sh 'npm install'
             }
         }
-       
+
+        stage('Lint') {
+            steps {
+                sh 'hadolint Dockerfile'
+            }
+        }
+
+        stage('Basic Information') {
+            steps {
+                sh "echo tag: ${params.RELEASE_TAG}"
+            }
+        }
+
         stage('Build Image to dockerhub') {
             when {
                 branch 'master'
@@ -154,7 +169,7 @@ pipeline {
             }
         }
 
-		stage('Removing image locallyy') {
+		stage('Removing image locally') {
 			when {
                 branch 'master'
             }
@@ -163,8 +178,10 @@ pipeline {
             }
 		}
     }
-	
-}
-}
-    
 
+    post {
+        always {
+            echo 'Pipeline finished'
+        }
+    }
+}

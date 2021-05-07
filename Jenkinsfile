@@ -157,7 +157,8 @@ pipeline {
                 sh "docker rmi $registry:$BUILD_NUMBER"
             }
 		}
-    }post {
+    }
+	post {
         cleanup {
             /* clean up our workspace */
             deleteDir()
@@ -171,6 +172,6 @@ pipeline {
             }
         }
     }
-
+}
     
 }

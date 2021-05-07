@@ -18,11 +18,7 @@ pipeline {
 
     tools {nodejs "nodejs" }
 
-    parameters {
-        gitParameter name: 'RELEASE_TAG',
-        type: 'PT_TAG',
-        defaultValue: 'master'
-    }
+    
 
     stages {
         
@@ -43,12 +39,7 @@ pipeline {
             }
         }
 
-        stage('Basic Information') {
-            steps {
-                sh "echo tag: ${params.RELEASE_TAG}"
-            }
-        }
-
+       
         stage('Build Image to dockerhub') {
             when {
                 branch 'master'

@@ -17,10 +17,7 @@ pipeline {
     agent any
 
      stages {
-	 stage('Cleanup') {
-		  deleteDir()
-		   }
-        
+	         
         stage('Cloning Git') {
             steps {
                 sh 'git clone https://github.com/uyuy2017/eks-deployment.git '

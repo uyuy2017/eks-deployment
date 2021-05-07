@@ -49,7 +49,7 @@ pipeline {
                 not { branch 'master' }
             }
             steps {
-				withAWS(credentials: 'aws-credentials', region: 'us-west-2') {
+		    {
                     echo 'Login first'
                     sh 'aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ekr_registry'
                     echo 'Build the image to EKR'

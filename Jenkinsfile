@@ -59,7 +59,7 @@ pipeline {
                     echo 'Push the image to EKR repo'
                     sh 'docker push 156823553040.dkr.ecr.us-west-2.amazonaws.com/eks-webapp:$BRANCH_NAME.$BUILD_NUMBER'
                 }
-			}
+			
         }
 
 		stage('Push Prod Image To Dockerhub') {

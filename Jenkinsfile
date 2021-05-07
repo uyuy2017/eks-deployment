@@ -49,7 +49,7 @@ pipeline {
                 not { branch 'master' }
             }
             steps {
-		    {
+				withAWS(credentials: 'aws-credentials', region: 'us-west-2') {
                     echo 'Login first'
                     sh 'aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ekr_registry'
                     echo 'Build the image to EKR'
@@ -59,9 +59,8 @@ pipeline {
                     echo 'Push the image to EKR repo'
                     sh 'docker push 156823553040.dkr.ecr.us-west-2.amazonaws.com/eks-webapp:$BRANCH_NAME.$BUILD_NUMBER'
                 }
-			
+			}
         }
-	}
 
 		stage('Push Prod Image To Dockerhub') {
 			when {
@@ -98,7 +97,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-				 {
+				{
 					sh "sed -i 's/latest/${env.BUILD_NUMBER}/g' ./eks/deployment.yaml" 
                     sh '''
                         grep image ./eks/deployment.yaml
@@ -132,7 +131,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-				withAWS(credentials: 'aws-credentials', region: 'us-west-2') {
+				 {
                     sh '''
                         kubectl get nodes -o wide |  awk {'print $1" " $2 " " $7'} | column -t
                         kubectl get pods -l 'app=my-app' -o wide | awk {'print $1" " $3 " " $6'} | column -t

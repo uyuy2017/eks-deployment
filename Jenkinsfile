@@ -9,7 +9,7 @@ pipeline {
         ekr_registry = 'public.ecr.aws/m7n6j8a2/mallikarjun'
 		dockerImage = ''
         region = 'us-west-2'
-        s3_bucket = 's3://jc-eks-cloudformation'
+        s3_bucket = 's3://malliuyuy2021'
         CI = 'true'
         app = 'my-app'
     }

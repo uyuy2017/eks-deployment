@@ -29,12 +29,7 @@ pipeline {
             }
         }
 
-              stage('Basic Information') {
-            steps {
-                sh "echo tag: ${params.RELEASE_TAG}"
-            }
-        }
-
+         
         stage('Build Image to dockerhub') {
             when {
                 branch 'master'

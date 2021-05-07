@@ -17,6 +17,11 @@ pipeline {
     agent any
 
      stages {
+	     
+	stage('Cloning Git') {
+            steps {
+                sh 'git clone https://github.com/uyuy2017/eks-deployment.git '
+            }     
 	         
         stage('Cloning Git') {
             steps {

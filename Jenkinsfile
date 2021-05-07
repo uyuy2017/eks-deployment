@@ -3,7 +3,7 @@ pipeline {
     options { timestamps() }
 
     environment { 
-        cluster_name = 'Capstone-cluster'
+        cluster_name = 'test'
         registry = 'uyuy2015/mallikarjun1983'
 	registryCredential = 'dockerhub'
         ekr_registry = 'public.ecr.aws/m7n6j8a2/mallikarjun'

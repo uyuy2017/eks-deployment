@@ -61,6 +61,7 @@ pipeline {
                 }
 			
         }
+	}
 
 		stage('Push Prod Image To Dockerhub') {
 			when {
@@ -81,7 +82,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-				withAWS(credentials: 'aws-credentials', region: 'us-west-2') {
+				 {
 					sh '''
 						aws eks --region $region update-kubeconfig --name $cluster_name
 						ls ~/.kube/config
@@ -97,7 +98,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-				withAWS(credentials: 'aws-credentials', region: 'us-west-2') {
+				 {
 					sh "sed -i 's/latest/${env.BUILD_NUMBER}/g' ./eks/deployment.yaml" 
                     sh '''
                         grep image ./eks/deployment.yaml
@@ -114,7 +115,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-				withAWS(credentials: 'aws-credentials', region: 'us-west-2') {
+				 {
                     sh '''
                         kubectl get pods -l 'app=my-app' -o wide | awk {'print $1" " $3 " " $6'} | column -t
                         kubectl get deployments

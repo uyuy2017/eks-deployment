@@ -153,7 +153,7 @@ pipeline {
             }
         }
 
-		stage('Removing image locally') {
+		stage('Removing image locallyy') {
 			when {
                 branch 'master'
             }

@@ -20,7 +20,7 @@ pipeline {
         
         stage('Cloning Git') {
             steps {
-                git 'https://github.com/uyuy2017/eks-deployment.git'
+                sh 'git clone https://github.com/uyuy2017/eks-deployment.git '
             }
         }
         stage('Build Dependencies') {

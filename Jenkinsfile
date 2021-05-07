@@ -4,8 +4,8 @@ pipeline {
 
     environment { 
         cluster_name = 'Capstone-cluster'
-        registry = 'javiercaparo/aws-jenkins-pipeline-v4'
-		registryCredential = 'dockerhub'
+        registry = 'uyuy2015/mallikarjun1983'
+	registryCredential = 'dockerhub'
         ekr_registry = '156823553040.dkr.ecr.us-west-2.amazonaws.com'
 		dockerImage = ''
         region = 'us-west-2'

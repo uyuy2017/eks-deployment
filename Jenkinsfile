@@ -17,7 +17,7 @@ pipeline {
     agent any
 
      stages {
-	 stage('Cleanup) {
+	 stage('Cleanup') {
 		  deleteDir()
 		   }
         

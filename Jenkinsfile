@@ -16,15 +16,7 @@ pipeline {
 
     agent any
 
-    tools {nodejs "nodejs" }
-
-    parameters {
-        gitParameter name: 'RELEASE_TAG',
-        type: 'PT_TAG',
-        defaultValue: 'master'
-    }
-
-    stages {
+     stages {
         
         stage('Cloning Git') {
             steps {
@@ -37,13 +29,7 @@ pipeline {
             }
         }
 
-        stage('Lint') {
-            steps {
-                sh 'hadolint Dockerfile'
-            }
-        }
-
-        stage('Basic Information') {
+              stage('Basic Information') {
             steps {
                 sh "echo tag: ${params.RELEASE_TAG}"
             }
